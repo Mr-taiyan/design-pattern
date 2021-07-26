@@ -1,4 +1,5 @@
 import java.lang.System.Logger.Level;
+import java.util.logging.Logger;
 
 /**
  * AbstractClassSample
@@ -15,5 +16,12 @@ public abstract class Loggor1 {
         this.minPermittedLevel = minPermittedLevel;
     }
 
+    public void log(Level level, String message) {
+        boolean loggable = enabled && (minPermittedLevel.intValue() <= level.intValue());
+        if (!loggable) return;
+        doLog(level, message);
+    }
+
+    protected abstract void doLog(Level level, String message);
 
 }
